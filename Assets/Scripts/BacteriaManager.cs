@@ -5,6 +5,15 @@ using UnityEngine;
 
 public class BacteriaManager : MonoBehaviour
 {
+
+    public Sprite sprite_norm_stat;
+    public Sprite sprite_norm_work;
+    public Sprite sprite_burn_stat;
+    public Sprite sprite_burn_work;
+    public Sprite sprite_almo_muta;
+    public Sprite sprite_mutated;
+    public Sprite sprite_dead;
+    
     /*sealed class BacteriaIdManager
     {
         private static BacteriaIdManager _instance = null;
@@ -68,6 +77,9 @@ public class BacteriaManager : MonoBehaviour
     public int DuplicationMultipliyer;
     public int ProductionMultipliyer;
 
+    public int MutationTriggering;
+    public int MutationThreshold;
+
     public ExposureLight LightTop;
     public ExposureLight LightBot;
     public ExposureLight LightRight;
@@ -83,6 +95,11 @@ public class BacteriaManager : MonoBehaviour
         bacterias = new Dictionary<int, Bacteria>();
         cmpt = 0;
         Production = 0;
+
+
+        // MutationTriggering = 800;
+        // MutationThreshold = 1000;
+
         CreateBacteria(transform.position);
     }
 
@@ -104,7 +121,8 @@ public class BacteriaManager : MonoBehaviour
                 BaseProdRate,
                 BaseDupliRate,
                 BaseDupliLim,
-                BaseMutRate);
+                BaseMutRate, 
+                modifier);
         }
         Debug.Log(bacterias.Count);
     }

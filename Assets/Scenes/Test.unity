@@ -821,9 +821,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2024a87766d16419514bdb0230c19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite_norm_stat: {fileID: 21300000, guid: 44eca1c4b2266715992311be7361e534, type: 3}
+  sprite_norm_work: {fileID: 21300000, guid: 6f89ca9d2ded92b3496aec9547ce29ae, type: 3}
+  sprite_burn_stat: {fileID: 21300000, guid: 7e4301bb9d62f1edbbce2b9e9f1e595a, type: 3}
+  sprite_burn_work: {fileID: 21300000, guid: 0ae481f947a9618b9b869b6ce33c92cc, type: 3}
+  sprite_almo_muta: {fileID: 0}
+  sprite_mutated: {fileID: 21300000, guid: 559f911983410dd9b9f5520921e47921, type: 3}
+  sprite_dead: {fileID: 21300000, guid: 7777ab431b4637461adbfaed00ebd303, type: 3}
   BacteriaPrefab: {fileID: 7166304344520806314, guid: 7dfe04a8fd91c6345b269c5accbf81a7, type: 3}
   BacteriaMax: 250
-  BaseLife: 60
+  BaseLife: 70
   BaseLifeRate: 1
   BaseProdRate: 0
   BaseDupliRate: 2
@@ -831,6 +838,8 @@ MonoBehaviour:
   BaseMutRate: 1
   DuplicationMultipliyer: 25
   ProductionMultipliyer: 10
+  MutationTriggering: 800
+  MutationThreshold: 1000
   LightTop: {fileID: 1719746081}
   LightBot: {fileID: 651014833}
   LightRight: {fileID: 346068577}
