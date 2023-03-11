@@ -68,8 +68,10 @@ public class BacteriaManager : MonoBehaviour
     public int DuplicationMultipliyer;
     public int ProductionMultipliyer;
 
-    public ExposureLight RedLight;
-    public ExposureLight GreenLight;
+    public ExposureLight LightTop;
+    public ExposureLight LightBot;
+    public ExposureLight LightRight;
+    public ExposureLight LightLeft;
     public TextMeshProUGUI text;
 
     private Dictionary<int, Bacteria> bacterias;

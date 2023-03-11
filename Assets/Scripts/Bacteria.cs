@@ -168,13 +168,21 @@ public class Bacteria : MonoBehaviour
     private void Update()
     {
         Debug.Log(ExposedLight);
-        if (Manager.RedLight.IsInLight(transform.position))
+        if (Manager.LightTop.IsInLight(transform.position))
         {
-            ExposedLight = Manager.RedLight.Type;
+            ExposedLight = Manager.LightTop.Type;
         }
-        else if (Manager.GreenLight.IsInLight(transform.position))
+        else if (Manager.LightBot.IsInLight(transform.position))
         {
-            ExposedLight = Manager.GreenLight.Type;
+            ExposedLight = Manager.LightBot.Type;
+        }
+        else if (Manager.LightLeft.IsInLight(transform.position))
+        {
+            ExposedLight = Manager.LightLeft.Type;
+        }
+        else if (Manager.LightRight.IsInLight(transform.position))
+        {
+            ExposedLight = Manager.LightRight.Type;
         }
         else
         {
@@ -214,12 +222,14 @@ public class Bacteria : MonoBehaviour
         {
             //croissance ++, production 0, lifeRate-
             DuplicationRate = Manager.DuplicationMultipliyer;
+            //LifeRate *= 3;
         }
         else
         {
             //base
             DuplicationRate = Manager.BaseDupliRate;
             ProductionRate = Manager.BaseProdRate;
+            //LifeRate = Manager.BaseLifeRate;
         }
     }
 
