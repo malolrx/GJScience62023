@@ -103,17 +103,16 @@ public class Bacteria : MonoBehaviour
                 random_mov rm = GetComponent<random_mov>();
                 if (rm) Destroy(rm);
 
-                float rate = (10f+life)/10f;
+                float rate = (100f+life)/100f;
                 SpriteRenderer sr = GetComponent<SpriteRenderer>();
                 sr.sprite = Manager.sprite_dead(ID%3);
                 sr.color *= rate;
                 
                 Rigidbody2D rb = GetComponent<Rigidbody2D>();
                 rb.mass = rate;
-                Debug.Log(life + " " + LifeRate + " " + sr.color + " " + rb.mass);
             }
 
-            if (life <= -10) 
+            if (life <= -100) 
             {
                 
                 Manager.Kill(this.ID);
@@ -203,6 +202,7 @@ public class Bacteria : MonoBehaviour
     }
 
     void resetRates() {
+        if (Life < 0) return;
 
         LifeRate = Manager.BaseLifeRate;
         DuplicationRate = Manager.BaseDupliRate;
@@ -264,6 +264,7 @@ public class Bacteria : MonoBehaviour
 
     private void Update()
     {
+
         Debug.Log(ExposedLight);
         if (Manager.LightTop.IsInLight(transform.position))
         {
@@ -285,6 +286,8 @@ public class Bacteria : MonoBehaviour
         {
             ExposedLight = ExposureLightType.NO;
         }
+        if (Life < 0)
+            Life -= LifeRate/2;
     }
 
     // Update is called once per frame

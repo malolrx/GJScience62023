@@ -55,8 +55,8 @@ public class movable : MonoBehaviour
         // float distance_midd = Vector3.Distance(mouse_comp.MiddleMovement, transform.position);
         float distance_midd = (distance_last+distance_actu)/2;
         float impulse_force = mouse_comp.DistanceLastPosition*force_push;
-
-        if (distance_line < 3) {
+    Debug.Log(impulse_force);
+        if (distance_line < impulse_force/3) {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.AddForce((actupos-lastpos)/(distance_midd)*(impulse_force));
             if (distance_actu > distance_last && distance_actu*distance_last < 2) 

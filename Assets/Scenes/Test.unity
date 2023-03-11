@@ -821,13 +821,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2024a87766d16419514bdb0230c19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite_norm_stat: {fileID: 21300000, guid: 44eca1c4b2266715992311be7361e534, type: 3}
-  sprite_norm_work: {fileID: 21300000, guid: 6f89ca9d2ded92b3496aec9547ce29ae, type: 3}
-  sprite_burn_stat: {fileID: 21300000, guid: 7e4301bb9d62f1edbbce2b9e9f1e595a, type: 3}
-  sprite_burn_work: {fileID: 21300000, guid: 0ae481f947a9618b9b869b6ce33c92cc, type: 3}
-  sprite_almo_muta: {fileID: 0}
-  sprite_mutated: {fileID: 21300000, guid: 559f911983410dd9b9f5520921e47921, type: 3}
-  sprite_dead: {fileID: 21300000, guid: 7777ab431b4637461adbfaed00ebd303, type: 3}
+  sprite_norm_stat_1: {fileID: 21300000, guid: 38cc4976c7b7f6e15b17a59511e5bd9c, type: 3}
+  sprite_norm_work_1: {fileID: 21300000, guid: 3a0c455c3506f1a7394e2891199e54e5, type: 3}
+  sprite_burn_stat_1: {fileID: 21300000, guid: 3d8e2b6504c5f83d1a98b96bda52d19a, type: 3}
+  sprite_burn_work_1: {fileID: 21300000, guid: 88bb1217a327a71468d4eba42c3d1110, type: 3}
+  sprite_almo_muta_1: {fileID: 21300000, guid: 978d55c75900c7ce7bffcc35f82bca81, type: 3}
+  sprite_mutated_1: {fileID: 21300000, guid: 7c0e00e19342ab713ad6532467548f11, type: 3}
+  sprite_dead_1: {fileID: 21300000, guid: 871b8792917f3772385b97ac58924748, type: 3}
+  sprite_norm_stat_2: {fileID: 21300000, guid: d736ae8078d4b3d6c8e4667e76fae54f, type: 3}
+  sprite_norm_work_2: {fileID: 21300000, guid: 22b677d37298becb5904742bd6e3f33c, type: 3}
+  sprite_burn_stat_2: {fileID: 21300000, guid: d24b82864388ce1c9a1c65ba369a62be, type: 3}
+  sprite_burn_work_2: {fileID: 21300000, guid: 395d09d79b399efefb321875e056188d, type: 3}
+  sprite_almo_muta_2: {fileID: 21300000, guid: 3f738eac39efc96c0b29b92f6ee7edf8, type: 3}
+  sprite_mutated_2: {fileID: 21300000, guid: 65997e80f9feabece9fdf072c7dff04f, type: 3}
+  sprite_dead_2: {fileID: 21300000, guid: 20bbb6869224810d4802ac7d97307d2f, type: 3}
+  sprite_norm_stat_3: {fileID: 21300000, guid: a1bc4ffa61cf41816b5c5ddcc3e61fcc, type: 3}
+  sprite_norm_work_3: {fileID: 21300000, guid: 3537795477865d5a0b5dc1d286a4ae71, type: 3}
+  sprite_burn_stat_3: {fileID: 21300000, guid: 6f1e286ca3c7a836ba0aece70237d70a, type: 3}
+  sprite_burn_work_3: {fileID: 21300000, guid: 0cf06432a4421908cb1715edda6db2d0, type: 3}
+  sprite_almo_muta_3: {fileID: 21300000, guid: 147920404399b452fb3896b0ab5ec377, type: 3}
+  sprite_mutated_3: {fileID: 21300000, guid: 287e610c80e29c9d08de7608d64080b0, type: 3}
+  sprite_dead_3: {fileID: 21300000, guid: a850157c34e1a45deaec6035c33c0891, type: 3}
   BacteriaPrefab: {fileID: 7166304344520806314, guid: 7dfe04a8fd91c6345b269c5accbf81a7, type: 3}
   BacteriaMax: 250
   BaseLife: 70
