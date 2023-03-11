@@ -105,7 +105,7 @@ public class Bacteria : MonoBehaviour
 
                 float rate = (10f+life)/10f;
                 SpriteRenderer sr = GetComponent<SpriteRenderer>();
-                sr.sprite = Manager.sprite_dead;
+                sr.sprite = Manager.sprite_dead(ID%3);
                 sr.color *= rate;
                 
                 Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -150,7 +150,7 @@ public class Bacteria : MonoBehaviour
             mutation = value;
             if (isAlmostMutated()) {
                 SpriteRenderer sr = GetComponent<SpriteRenderer>();
-                // sr.sprite = Manager.sprite_almo_muta;
+                sr.sprite = Manager.sprite_almo_muta(ID%3);
                 // change sprite to almost mutated
             }
             if (isMutated()) {
@@ -164,7 +164,7 @@ public class Bacteria : MonoBehaviour
                 Mutation = 0;
 
                 SpriteRenderer sr = GetComponent<SpriteRenderer>();
-                sr.sprite = Manager.sprite_mutated;
+                sr.sprite = Manager.sprite_mutated(ID%3);
             }
         }
     }
@@ -191,7 +191,7 @@ public class Bacteria : MonoBehaviour
     UnityEvent LightChanged;
 
     bool isBurnedOut() {
-        return Life < DuplicationLimitation - Duplication;
+        return Life < DuplicationLimitation;
     }
 
     bool isMutated() {
@@ -211,13 +211,18 @@ public class Bacteria : MonoBehaviour
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         if (Mutation > Manager.MutationThreshold) {
-            sr.sprite = Manager.sprite_mutated;
+            sr.sprite = Manager.sprite_mutated(ID%3);
             return;
         }
         if (isBurnedOut()) {
-            sr.sprite = Manager.sprite_burn_stat;
+            sr.sprite = Manager.sprite_burn_stat(ID%3);
             return;
         }
+        if (isAlmostMutated()) {
+            sr.sprite = Manager.sprite_almo_muta(ID%3);
+            return;
+        }
+        sr.sprite = Manager.sprite_norm_stat(ID%3);
     }
 
     // Start is called before the first frame update
@@ -229,6 +234,7 @@ public class Bacteria : MonoBehaviour
         Duplication = 0;
         cmpt = 0;
         InvokeRepeating("UpdateSecond", 0, 1.0f);
+        GetComponent<SpriteRenderer>().sprite = Manager.sprite_norm_stat(ID%3);
     }
 
     public void Init(BacteriaManager man,
@@ -298,7 +304,7 @@ public class Bacteria : MonoBehaviour
 
     private void DuplicateBacteria()
     {
-        Manager.CreateBacteria(transform.position, (int)(Mutation*0.7));
+        Manager.CreateBacteria(transform.position, isMutated()?(int)Manager.MutationThreshold:(int)(Mutation*0.9));
     }
 
     private void OnLightChanged()
@@ -323,9 +329,9 @@ public class Bacteria : MonoBehaviour
 
             SpriteRenderer sr = GetComponent<SpriteRenderer>();
             if (isBurnedOut()) {
-                sr.sprite = Manager.sprite_burn_work;
+                sr.sprite = Manager.sprite_burn_work(ID%3);
             } else {
-                sr.sprite = Manager.sprite_norm_work;
+                sr.sprite = Manager.sprite_norm_work(ID%3);
             }
         }
         else if(ExposedLight == ExposureLightType.GREEN)
