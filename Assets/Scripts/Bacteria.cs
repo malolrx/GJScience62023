@@ -222,7 +222,7 @@ public class Bacteria : MonoBehaviour
         {
             //croissance ++, production 0, lifeRate-
             DuplicationRate = Manager.DuplicationMultipliyer;
-            //LifeRate *= 3;
+            LifeRate /= 3;
         }
         else
         {
