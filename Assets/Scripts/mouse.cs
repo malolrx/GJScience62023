@@ -13,7 +13,7 @@ public class mouse : MonoBehaviour
     }
 
     private float distanceLastPos;
-    public float DisctanceLastPosition {
+    public float DistanceLastPosition {
         get {
             return distanceLastPos;
         }
