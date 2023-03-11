@@ -115,7 +115,6 @@ public class Bacteria : MonoBehaviour
 
     public int ID;
     public BacteriaManager Manager;
-    private int cmpt;
     bool ready;
 
     private ExposureLightType exposedLight;
@@ -138,7 +137,6 @@ public class Bacteria : MonoBehaviour
     void Start()
     {
         Duplication = 0;
-        cmpt = 0;
         InvokeRepeating("UpdateSecond", 0, 1.0f);
     }
 
@@ -193,8 +191,6 @@ public class Bacteria : MonoBehaviour
     // Update is called once per frame
     void UpdateSecond()
     {
-        Debug.Log("prod" + ProductionRate);
-        Debug.Log("Dupli" + DuplicationRate);
         if (ready)
         {
             Duplication += DuplicationRate;

@@ -12,7 +12,7 @@ public class ExposureLight : MonoBehaviour
         NO
     }
 
-    public ExposureLightType type;
+    private ExposureLightType type;
     public ExposureLightType Type
     {
         get
@@ -27,21 +27,44 @@ public class ExposureLight : MonoBehaviour
         }
     }
 
+    private bool on;
+    public bool ON
+    {
+        get
+        {
+            return on;
+        }
+
+        set
+        {
+            if (value)
+            {
+                GetComponent<SpriteRenderer>().color = Color.gray;
+            }
+            else
+            {
+                ChangeColor();
+            }
+        }
+    }
+
     public GameObject Controllers;
     private Button Redbut;
     private Button Nobut;
     private Button Greenbut;
+    private ExposureLightType beforeNo;
 
     // Start is called before the first frame update
     void Start()
     {
+        beforeNo = ExposureLightType.GREEN;
         ChangeColor();
         Debug.Log(Controllers.GetComponentsInChildren<Button>().Length);
         Nobut = Controllers.GetComponentsInChildren<Button>()[0];
         Greenbut = Controllers.GetComponentsInChildren<Button>()[1];
         Redbut = Controllers.GetComponentsInChildren<Button>()[2];
 
-        Nobut.onClick.AddListener(No);
+        Nobut.onClick.AddListener(SwitchOn);
         Greenbut.onClick.AddListener(Green);
         Redbut.onClick.AddListener(Red);
     }
@@ -54,7 +77,7 @@ public class ExposureLight : MonoBehaviour
 
     public bool IsInLight(Vector3 position)
     {
-        return GetComponent<Collider2D>().bounds.Contains(position);
+        return GetComponent<Collider2D>().bounds.Contains(position) && ON;
     }
 
     public void ChangeColor()
@@ -66,9 +89,6 @@ public class ExposureLight : MonoBehaviour
                 break;
             case ExposureLightType.GREEN:
                 GetComponent<SpriteRenderer>().color = Color.green;
-                break;
-            case ExposureLightType.NO:
-                GetComponent<SpriteRenderer>().color = Color.gray;
                 break;
         }
     }
@@ -83,8 +103,8 @@ public class ExposureLight : MonoBehaviour
         Type = ExposureLightType.GREEN;
     }
 
-    public void No()
+    public void SwitchOn()
     {
-        Type = ExposureLightType.NO;
+        ON = !ON;
     }
 }
