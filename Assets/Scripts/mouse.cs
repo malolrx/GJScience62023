@@ -2,24 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class mouse : MonoBehaviour
 {
-    Vector3 lastPos;
+    private Vector3 lastPos;
+    public Vector3 LastPosition {
+        get {
+            return lastPos;
+        }
+    }
+
+    private float distanceLastPos;
+    public float DisctanceLastPosition {
+        get {
+            return distanceLastPos;
+        }
+    }
+
+    private Vector3 middleMov;
+    public Vector3 MiddleMovement {
+        get {
+            return middleMov;
+        }
+    }
+
+    Vector3 MousePositionInScreen() {
+        Vector3 mousepos = Input.mousePosition;
+        mousepos.z = 10;
+        return Camera.main.ScreenToWorldPoint(mousepos);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        lastPos = Input.mousePosition;
+        name = "Mouse";
+        lastPos = MousePositionInScreen();
+        distanceLastPos = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-        lastPos = transform.position; 
-        transform.position = Input.mousePosition;
 
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        
+    // Update is called once per frame
+    void LateUpdate()
+    {
+        lastPos = transform.position;
+        transform.position = MousePositionInScreen();
+        distanceLastPos = Vector3.Distance(lastPos, transform.position);
+        middleMov = (lastPos + transform.position)/2;
+
+        // Rigidbody2D rb = GetComponent<Rigidbody2D>();
         // GameObject trace = new GameObject();
         // trace.AddComponent<SpriteRenderer>();
 
