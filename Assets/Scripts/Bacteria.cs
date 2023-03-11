@@ -90,9 +90,29 @@ public class Bacteria : MonoBehaviour
         get { return life; }
         set
         {
+            
             life = value;
             if (life <= 0)
             {
+                // death animation
+                DuplicationRate = 0;
+                Duplication = 0;
+                ProductionRate = 0;
+                random_mov rm = GetComponent<random_mov>();
+                if (rm) Destroy(rm);
+
+                float rate = (10f+life)/10f;
+                SpriteRenderer sr = GetComponent<SpriteRenderer>();
+                sr.color *= rate;
+                
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                rb.mass = rate;
+                Debug.Log(life + " " + LifeRate + " " + sr.color + " " + rb.mass);
+            }
+            
+            if (life <= -10) 
+            {
+                
                 Manager.Kill(this.ID);
             }
         }
@@ -213,6 +233,7 @@ public class Bacteria : MonoBehaviour
             //croissance 0, production ++
             DuplicationRate = 0;
             ProductionRate = Manager.ProductionMultipliyer;
+            LifeRate = Manager.BaseLifeRate;
         }
         else if(ExposedLight == ExposureLightType.GREEN)
         {
@@ -225,7 +246,7 @@ public class Bacteria : MonoBehaviour
             //base
             DuplicationRate = Manager.BaseDupliRate;
             ProductionRate = Manager.BaseProdRate;
-            //LifeRate = Manager.BaseLifeRate;
+            LifeRate = Manager.BaseLifeRate;
         }
     }
 

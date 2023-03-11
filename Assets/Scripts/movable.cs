@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class movable : MonoBehaviour
 {
+    public int force_push = 7;
     static private GameObject mouse_obj;
     static public GameObject MouseObj{
         get {return mouse_obj;}
@@ -26,7 +27,7 @@ public class movable : MonoBehaviour
     void Start()
     {
         accel = new Vector3(0,0,0);
-        
+        force_push = 7;
         MouseObj = GameObject.Find("Mouse");
         // if (MouseObj == null) Debug.Log("can't find mouse");
         if (MouseObj)
@@ -53,7 +54,7 @@ public class movable : MonoBehaviour
         float distance_actu = Vector3.Distance(actupos, transform.position);
         // float distance_midd = Vector3.Distance(mouse_comp.MiddleMovement, transform.position);
         float distance_midd = (distance_last+distance_actu)/2;
-        float impulse_force = mouse_comp.DistanceLastPosition*7;
+        float impulse_force = mouse_comp.DistanceLastPosition*force_push;
 
         if (distance_line < 3) {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
