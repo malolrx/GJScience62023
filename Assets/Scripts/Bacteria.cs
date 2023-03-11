@@ -6,6 +6,7 @@ using static ExposureLight;
 
 public class Bacteria : MonoBehaviour
 {
+    private double duplicationRateOffset;
     private double duplicationRate;
     public double DuplicationRate
     {
@@ -70,6 +71,7 @@ public class Bacteria : MonoBehaviour
     }
 
 
+    private double productionRateOffset;
     private double productionRate;
     public double ProductionRate
     {
@@ -101,16 +103,16 @@ public class Bacteria : MonoBehaviour
                 random_mov rm = GetComponent<random_mov>();
                 if (rm) Destroy(rm);
 
-                float rate = (10f+life)/10f;
+                float rate = (100f+life)/100f;
                 SpriteRenderer sr = GetComponent<SpriteRenderer>();
+                sr.sprite = Manager.sprite_dead(ID%3);
                 sr.color *= rate;
                 
                 Rigidbody2D rb = GetComponent<Rigidbody2D>();
                 rb.mass = rate;
-                Debug.Log(life + " " + LifeRate + " " + sr.color + " " + rb.mass);
             }
-            
-            if (life <= -10) 
+
+            if (life <= -100) 
             {
                 
                 Manager.Kill(this.ID);
@@ -130,6 +132,39 @@ public class Bacteria : MonoBehaviour
         set
         {
             mutationRate = value;
+        }
+    }
+
+    private double mutationRateOffset;
+    private double mutation;
+    public double Mutation
+    {
+        get
+        {
+            return mutation;
+        }
+
+        set
+        {
+            mutation = value;
+            if (isAlmostMutated()) {
+                SpriteRenderer sr = GetComponent<SpriteRenderer>();
+                sr.sprite = Manager.sprite_almo_muta(ID%3);
+                // change sprite to almost mutated
+            }
+            if (isMutated()) {
+                // gets a mutation and a new sprite
+
+                // productionRateOffset-=1; ?
+                mutationRateOffset+=2;
+                duplicationRateOffset+=1;
+
+                // ?
+                Mutation = 0;
+
+                SpriteRenderer sr = GetComponent<SpriteRenderer>();
+                sr.sprite = Manager.sprite_mutated(ID%3);
+            }
         }
     }
 
@@ -153,11 +188,51 @@ public class Bacteria : MonoBehaviour
 
     UnityEvent LightChanged;
 
+    bool isBurnedOut() {
+        return Life < DuplicationLimitation;
+    }
+
+    bool isMutated() {
+        return Mutation > Manager.MutationThreshold;
+    }
+
+    bool isAlmostMutated() {
+        return Mutation > Manager.MutationTriggering;
+    }
+
+    void resetRates() {
+        if (Life < 0) return;
+
+        LifeRate = Manager.BaseLifeRate;
+        DuplicationRate = Manager.BaseDupliRate;
+        ProductionRate = Manager.BaseProdRate;
+        MutationRate = Manager.BaseMutRate;
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (Mutation > Manager.MutationThreshold) {
+            sr.sprite = Manager.sprite_mutated(ID%3);
+            return;
+        }
+        if (isBurnedOut()) {
+            sr.sprite = Manager.sprite_burn_stat(ID%3);
+            return;
+        }
+        if (isAlmostMutated()) {
+            sr.sprite = Manager.sprite_almo_muta(ID%3);
+            return;
+        }
+        sr.sprite = Manager.sprite_norm_stat(ID%3);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        mutationRateOffset=0;
+        duplicationRateOffset=0;
+        productionRateOffset=0;
         Duplication = 0;
         InvokeRepeating("UpdateSecond", 0, 1.0f);
+        GetComponent<SpriteRenderer>().sprite = Manager.sprite_norm_stat(ID%3);
     }
 
     public void Init(BacteriaManager man,
@@ -167,7 +242,8 @@ public class Bacteria : MonoBehaviour
                     double ProdRate,
                     double DupliRate,
                     int DupliLim,
-                    double MutRate
+                    double MutRate,
+                    double Mutation
                     )
     {
         this.Manager = man;
@@ -178,6 +254,7 @@ public class Bacteria : MonoBehaviour
         this.DuplicationLimitation = DupliLim;
         this.ProductionRate = ProdRate;
         this.MutationRate = MutRate;
+        this.Mutation = Mutation;
         ready = true;
         LightChanged = new UnityEvent();
         LightChanged.AddListener(OnLightChanged);
@@ -185,6 +262,7 @@ public class Bacteria : MonoBehaviour
 
     private void Update()
     {
+
         Debug.Log(ExposedLight);
         if (Manager.LightTop.IsInLight(transform.position))
         {
@@ -206,6 +284,8 @@ public class Bacteria : MonoBehaviour
         {
             ExposedLight = ExposureLightType.NO;
         }
+        if (Life < 0)
+            Life -= LifeRate/2;
     }
 
     // Update is called once per frame
@@ -213,8 +293,9 @@ public class Bacteria : MonoBehaviour
     {
         if (ready)
         {
-            Duplication += DuplicationRate;
+            Duplication += DuplicationRate + duplicationRateOffset;
             Life -= LifeRate;
+            Mutation += MutationRate + mutationRateOffset;
             Manager.Production += ProductionRate;
         }
         
@@ -222,31 +303,49 @@ public class Bacteria : MonoBehaviour
 
     private void DuplicateBacteria()
     {
-        Manager.CreateBacteria(transform.position);
+        Manager.CreateBacteria(transform.position, isMutated()?(int)Manager.MutationThreshold:(int)(Mutation*0.9));
     }
 
     private void OnLightChanged()
     {
+        if (isMutated()) return;
+
         Debug.Log("trigger");
         if(ExposedLight == ExposureLightType.RED)
         {
+            resetRates();
             //croissance 0, production ++
-            DuplicationRate = 0;
-            ProductionRate = Manager.ProductionMultipliyer;
-            LifeRate = Manager.BaseLifeRate;
+            if (duplicationRateOffset != 0) {
+                DuplicationRate = 0;
+            }
+            if (productionRateOffset == 0)
+            {
+                ProductionRate = Manager.ProductionMultipliyer;
+            } else {
+                ProductionRate = productionRateOffset;
+            }
+            LifeRate+=1;
+
+            SpriteRenderer sr = GetComponent<SpriteRenderer>();
+            if (isBurnedOut()) {
+                sr.sprite = Manager.sprite_burn_work(ID%3);
+            } else {
+                sr.sprite = Manager.sprite_norm_work(ID%3);
+            }
         }
         else if(ExposedLight == ExposureLightType.GREEN)
         {
+            resetRates();
             //croissance ++, production 0, lifeRate-
-            DuplicationRate = Manager.DuplicationMultipliyer;
+            if (duplicationRateOffset == 0)
+                DuplicationRate = Manager.DuplicationMultipliyer;
             LifeRate /= 3;
+            MutationRate += 2;
         }
         else
         {
             //base
-            DuplicationRate = Manager.BaseDupliRate;
-            ProductionRate = Manager.BaseProdRate;
-            LifeRate = Manager.BaseLifeRate;
+            resetRates();
         }
     }
 

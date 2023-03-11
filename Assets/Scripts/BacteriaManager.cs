@@ -5,6 +5,98 @@ using UnityEngine;
 
 public class BacteriaManager : MonoBehaviour
 {
+
+    public Sprite sprite_norm_stat(int key) {
+        switch(key) {
+            case 0: return sprite_norm_stat_1;
+            case 1: return sprite_norm_stat_2;
+            case 2: return sprite_norm_stat_3;
+            default :
+            return sprite_norm_stat_1;
+        }
+    }
+    public Sprite sprite_norm_work(int key) {
+        switch(key) {
+            case 0: return sprite_norm_work_1;
+            case 1: return sprite_norm_work_2;
+            case 2: return sprite_norm_work_3;
+            default :
+            return sprite_norm_work_1;
+        }
+    }
+    public Sprite sprite_burn_stat(int key) {
+        switch(key) {
+            case 0: return sprite_burn_stat_1;
+            case 1: return sprite_burn_stat_2;
+            case 2: return sprite_burn_stat_3;
+            default :
+            return sprite_burn_stat_1;
+        }
+    }
+
+    public Sprite sprite_burn_work(int key) {
+        switch(key) {
+            case 0: return sprite_burn_work_1;
+            case 1: return sprite_burn_work_2;
+            case 2: return sprite_burn_work_3;
+            default :
+            return sprite_burn_work_1;
+        }
+    }
+
+    public Sprite sprite_almo_muta(int key) {
+        switch(key) {
+            case 0: return sprite_almo_muta_1;
+            case 1: return sprite_almo_muta_2;
+            case 2: return sprite_almo_muta_3;
+            default :
+            return sprite_almo_muta_1;
+        }
+    }
+
+    public Sprite sprite_mutated(int key) {
+        switch(key) {
+            case 0: return sprite_mutated_1;
+            case 1: return sprite_mutated_2;
+            case 2: return sprite_mutated_3;
+            default :
+            return sprite_mutated_1;
+        }
+    }
+
+    public Sprite sprite_dead(int key) {
+        switch(key) {
+            case 0: return sprite_dead_1;
+            case 1: return sprite_dead_2;
+            case 2: return sprite_dead_3;
+            default :
+            return sprite_dead_1;
+        }
+    }
+
+
+    public Sprite sprite_norm_stat_1;
+    public Sprite sprite_norm_work_1;
+    public Sprite sprite_burn_stat_1;
+    public Sprite sprite_burn_work_1;
+    public Sprite sprite_almo_muta_1;
+    public Sprite sprite_mutated_1;
+    public Sprite sprite_dead_1;
+    public Sprite sprite_norm_stat_2;
+    public Sprite sprite_norm_work_2;
+    public Sprite sprite_burn_stat_2;
+    public Sprite sprite_burn_work_2;
+    public Sprite sprite_almo_muta_2;
+    public Sprite sprite_mutated_2;
+    public Sprite sprite_dead_2;
+    public Sprite sprite_norm_stat_3;
+    public Sprite sprite_norm_work_3;
+    public Sprite sprite_burn_stat_3;
+    public Sprite sprite_burn_work_3;
+    public Sprite sprite_almo_muta_3;
+    public Sprite sprite_mutated_3;
+    public Sprite sprite_dead_3;
+    
     /*sealed class BacteriaIdManager
     {
         private static BacteriaIdManager _instance = null;
@@ -68,6 +160,9 @@ public class BacteriaManager : MonoBehaviour
     public int DuplicationMultipliyer;
     public int ProductionMultipliyer;
 
+    public int MutationTriggering;
+    public int MutationThreshold;
+
     public ExposureLight LightTop;
     public ExposureLight LightBot;
     public ExposureLight LightRight;
@@ -83,6 +178,11 @@ public class BacteriaManager : MonoBehaviour
         bacterias = new Dictionary<int, Bacteria>();
         cmpt = 0;
         Production = 0;
+
+
+        // MutationTriggering = 800;
+        // MutationThreshold = 1000;
+
         CreateBacteria(transform.position);
     }
 
@@ -104,7 +204,8 @@ public class BacteriaManager : MonoBehaviour
                 BaseProdRate,
                 BaseDupliRate,
                 BaseDupliLim,
-                BaseMutRate);
+                BaseMutRate, 
+                modifier);
         }
         Debug.Log(bacterias.Count);
     }
