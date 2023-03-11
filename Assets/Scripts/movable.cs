@@ -55,10 +55,10 @@ public class movable : MonoBehaviour
         if (distance_line < 2f) {
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.AddForce((actupos-lastpos)/distance_midd);
-            if (distance_actu > distance_last && distance_actu*distance_last < 5) 
+            /*if (distance_actu > distance_last && distance_actu*distance_last < 5) 
                 rb.AddForce(mouse_comp.MiddleMovement - transform.position);
             if (distance_actu < distance_last && distance_actu*distance_last < 5) 
-                rb.AddForce(transform.position - mouse_comp.MiddleMovement);
+                rb.AddForce(transform.position - mouse_comp.MiddleMovement);*/
         }
 
         // rb.AddForce((transform.position -  middle) * distrel / (dist));
