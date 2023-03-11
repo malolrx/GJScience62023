@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using static ExposureLight;
 
 public class Bacteria : MonoBehaviour
 {
@@ -18,19 +20,21 @@ public class Bacteria : MonoBehaviour
         }
     }
 
+
     private double duplicationLimitation;
     public double DuplicationLimitation
     {
         get
         {
-            return duplicationRate;
+            return duplicationLimitation;
         }
 
         set
         {
-            duplicationRate = value;
+            duplicationLimitation = value;
         }
     }
+
 
     private double duplication;
     public double Duplication
@@ -41,7 +45,7 @@ public class Bacteria : MonoBehaviour
         }
         set
         {
-            if(value == DuplicationLimitation)
+            if(duplication >= DuplicationLimitation)
             {
                 DuplicateBacteria();
                 duplication = 0;
@@ -50,6 +54,7 @@ public class Bacteria : MonoBehaviour
             duplication = value;
         }
     }
+
 
     private float lifeRate;
     public float LifeRate
@@ -64,6 +69,7 @@ public class Bacteria : MonoBehaviour
         }
     }
 
+
     private double productionRate;
     public double ProductionRate
     {
@@ -77,6 +83,7 @@ public class Bacteria : MonoBehaviour
         }
     }
     
+
     private float life;
     public float Life
     {
@@ -90,6 +97,7 @@ public class Bacteria : MonoBehaviour
             }
         }
     }
+
 
     private double mutationRate;
     public double MutationRate
@@ -110,14 +118,27 @@ public class Bacteria : MonoBehaviour
     private int cmpt;
     bool ready;
 
+    private ExposureLightType exposedLight;
+    public ExposureLightType ExposedLight
+    {
+        get
+        {
+            return exposedLight;
+        }
+        set
+        {
+            exposedLight = value;
+            LightChanged.Invoke();
+        }
+    }
 
+    UnityEvent LightChanged;
 
     // Start is called before the first frame update
     void Start()
     {
         Duplication = 0;
         cmpt = 0;
-        ready = false;
         InvokeRepeating("UpdateSecond", 0, 1.0f);
     }
 
@@ -134,30 +155,72 @@ public class Bacteria : MonoBehaviour
         this.Manager = man;
         this.ID = ID;
         this.Life = Life;
-        this.DuplicationRate = DupliRate;
         this.LifeRate = LifeRate;
-        this.ProductionRate = ProdRate;
+        this.DuplicationRate = DupliRate;
         this.DuplicationLimitation = DupliLim;
+        this.ProductionRate = ProdRate;
         this.MutationRate = MutRate;
         ready = true;
+        LightChanged = new UnityEvent();
+        LightChanged.AddListener(OnLightChanged);
+    }
+
+    private void Update()
+    {
+        Debug.Log(ExposedLight);
+        if (Manager.RedLight.IsInLight(transform.position))
+        {
+            ExposedLight = Manager.RedLight.Type;
+        }
+        else if (Manager.GreenLight.IsInLight(transform.position))
+        {
+            ExposedLight = Manager.GreenLight.Type;
+        }
+        else
+        {
+            ExposedLight = ExposureLightType.NO;
+        }
     }
 
     // Update is called once per frame
     void UpdateSecond()
     {
-        
+        Debug.Log("prod" + ProductionRate);
+        Debug.Log("Dupli" + DuplicationRate);
         if (ready)
         {
             Duplication += DuplicationRate;
             Life -= LifeRate;
+            Manager.Production += ProductionRate;
         }
         
     }
 
     private void DuplicateBacteria()
     {
-        Manager.CreateBacteria(transform.position,cmpt);
-        cmpt++;
+        Manager.CreateBacteria(transform.position);
+    }
+
+    private void OnLightChanged()
+    {
+        Debug.Log("trigger");
+        if(ExposedLight == ExposureLightType.RED)
+        {
+            //croissance 0, production ++
+            DuplicationRate = 0;
+            ProductionRate = Manager.ProductionMultipliyer;
+        }
+        else if(ExposedLight == ExposureLightType.GREEN)
+        {
+            //croissance ++, production 0, lifeRate-
+            DuplicationRate = Manager.DuplicationMultipliyer;
+        }
+        else
+        {
+            //base
+            DuplicationRate = Manager.BaseDupliRate;
+            ProductionRate = Manager.BaseProdRate;
+        }
     }
 
 }

@@ -19,7 +19,6 @@ public class random_mov : MonoBehaviour
             int x = Random.Range(-2,3);
             int y = Random.Range(-2,3);
             rb.AddForce(new Vector3(x,y,0));
-            Debug.Log(x + " " + y);
             force +=2*( x*x + y*y);
         } else {
             force --;
