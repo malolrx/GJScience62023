@@ -849,13 +849,13 @@ MonoBehaviour:
   BaseProdRate: 0
   BaseDupliRate: 1
   BaseDupliLim: 20
-  BaseMutRate: 1
+  BaseMutRate: 3
   DuplicationMultipliyer: 25
   ProductionMultipliyer: 10
   LifeRateDivider: 2
   MutationMultipliyer: 4
-  MutationTriggering: 800
-  MutationThreshold: 1000
+  MutationTriggering: 400
+  MutationThreshold: 500
   LightTop: {fileID: 1719746081}
   LightBot: {fileID: 651014833}
   LightRight: {fileID: 346068577}

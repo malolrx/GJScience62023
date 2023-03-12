@@ -49,7 +49,6 @@ public class Bacteria : MonoBehaviour
             if(duplication >= DuplicationLimitation)
             {
                 DuplicateBacteria();
-                duplication = 0;
                 return;
             }
             duplication = value;
@@ -156,7 +155,7 @@ public class Bacteria : MonoBehaviour
             if (isMutated()) {
                 // gets a mutation and a new sprite
 
-                // productionRateOffset-=1; ?
+                productionRateOffset-=1; ?
                 mutationRateOffset+=2;
                 duplicationRateOffset+=1;
                 LifeRate = Manager.BaseLifeRate;
@@ -213,16 +212,16 @@ public class Bacteria : MonoBehaviour
         MutationRate = Manager.BaseMutRate;
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
-        if (Mutation > Manager.MutationThreshold) {
+        if (isMutated()) {
             sr.sprite = Manager.sprite_mutated(ID%3);
-            return;
-        }
-        if (isBurnedOut()) {
-            sr.sprite = Manager.sprite_burn_stat(ID%3);
             return;
         }
         if (isAlmostMutated()) {
             sr.sprite = Manager.sprite_almo_muta(ID%3);
+            return;
+        }
+        if (isBurnedOut()) {
+            sr.sprite = Manager.sprite_burn_stat(ID%3);
             return;
         }
         sr.sprite = Manager.sprite_norm_stat(ID%3);
@@ -312,9 +311,12 @@ public class Bacteria : MonoBehaviour
     {
         Debug.Log("duplication : " + Life + " " + Mutation);
         // Duplication = 0;
-        Mutation *= 0.92f;
-        if (Manager.CreateBacteria(transform.position, Mutation))
+        if (Mutation < Manager.MutationThreshold)
+            Mutation *= 0.92f;
+        if (Manager.CreateBacteria(transform.position, Mutation)) {
             Life = Manager.BaseLife;
+            Duplication = 0;
+        }
 
     }
 
