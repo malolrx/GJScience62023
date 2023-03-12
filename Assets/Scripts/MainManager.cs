@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
@@ -30,7 +31,10 @@ public class MainManager : MonoBehaviour
     public int ScoreToJauge;
     public LightManager LightManagerInstance;
     public BacteriaManager BacteriaManagerInstance;
-    public GameObject FinTuto;
+    public GameObject Dialogue;
+    public GameObject Recolte;
+    public GameObject VictoryDial;
+    public GameObject DefaiteDial;
     public TextMeshProUGUI JaugeLabel;
 
     private int NbrJauge;
@@ -39,112 +43,107 @@ public class MainManager : MonoBehaviour
     public bool Tuto;
     public static bool Pause;
 
+    private int dialStep;
+    bool step1;
+    bool step2;
+    bool step3;
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        dialStep = 0;
+        step1 = false;
+        step2 = false;
+        step3 = false;
         Pause = true;
         NbrJauge = 0;
         NextJaugeStep = 1;
         ActualPhase = GamePhase.ONE;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckProduction();
+        Check();
     }
 
     private void ManagePhase()
     {
-        if (Tuto)
+        switch (ActualPhase)
         {
-            switch (ActualPhase)
-            {
-                case GamePhase.ONE:
-                    EnableTop(true);
-                    EnableBot(false);
-                    EnableRight(false);
-                    EnableLeft(false);
-                    EnableColorSwitch(false);
-                    break;
-
-                case GamePhase.TWO:
-                    EnableBot(true);
-                    EnableColorSwitch(true);
-                    LightManagerInstance.SwitchBot.gameObject.SetActive(true);
-                    break;
-            }
-        }
-        else
-        {
-            switch (ActualPhase)
-            {
-                case GamePhase.ONE:
-                    EnableTop(true);
-                    EnableBot(false);
-                    EnableRight(false);
-                    EnableLeft(false);
-                    break;
-
-                case GamePhase.TWO:
-                    EnableBot(true);
-
-                    break;
-                case GamePhase.THREE:
-                    EnableRight(true);
-                    EnableLeft(true);
-                    break;
-            }
+            case GamePhase.ONE:
+                EnableTop(true);
+                EnableBot(false);
+                EnableRight(false);
+                EnableLeft(false);
+                Debug.Log("test"+Tuto+step1);
+                if (Tuto && step1==false)
+                {
+                    
+                    Pause = true;
+                    Dialogue.SetActive(true);
+                    step1 = true;
+                }
+                break;
+            case GamePhase.TWO:
+                EnableBot(true);
+                if (Tuto && step2==false)
+                {
+                    Pause = true;
+                    Dialogue.SetActive(true);
+                    step2 = true;
+                }
+                break;
+            case GamePhase.THREE:
+                EnableRight(true);
+                EnableLeft(true);
+                if (Tuto && step3 == false)
+                {
+                    Pause = true;
+                    Dialogue.SetActive(true);
+                    Recolte.SetActive(true);
+                    step3 = true;
+                }
+                break;
         }
         
     }
 
-    private void CheckProduction()
+    private void Check()
     {
-        if (Tuto)
+        if(BacteriaManagerInstance.Production >= ScoreToJauge)
         {
-            if (BacteriaManagerInstance.bacterias.Count == BacteriaManagerInstance.BacteriaMax && ActualPhase == GamePhase.ONE)
-            {
-                ActualPhase = GamePhase.TWO;
-            }
-
-            if(BacteriaManagerInstance.Production >= ScoreToJauge)
-            {
-                //fin tuto
-                Debug.Log("fin tuto");
-                Pause = true;
-                FinTuto.SetActive(true);
-            }
+            BacteriaManagerInstance.Production -= ScoreToJauge;
+            NbrJauge++;
+            JaugeLabel.text = NbrJauge.ToString();
         }
-        else
+
+        if(BacteriaManagerInstance.bacterias.Count == BacteriaManagerInstance.BacteriaMax && !step2)
         {
+            ActualPhase = GamePhase.TWO;
+            step2 = true;
+            
+        }
 
-            if (BacteriaManagerInstance.Production >= ScoreToJauge)
-            {
-                BacteriaManagerInstance.Production -= ScoreToJauge;
-                NbrJauge++;
-                
-                JaugeLabel.text = NbrJauge.ToString();
-            }
+        if(NbrJauge == NextJaugeStep && !step3)
+        {
+            ActualPhase = GamePhase.THREE;
+            NextJaugeStep *= 2;
+        }
 
-            if (NbrJauge == NextJaugeStep)
-            {
-                if (ActualPhase == GamePhase.ONE)
-                {
-                    ActualPhase = GamePhase.TWO;
-                }
-                else if (ActualPhase == GamePhase.TWO)
-                {
-                    ActualPhase = GamePhase.THREE;
-                }
-                NextJaugeStep *= 2;
-            }
+        if(NbrJauge == NextJaugeStep && step3)
+        {
+            NextJaugeStep *= 2;
+        }
 
-
+        if(BacteriaManagerInstance.bacterias.Count == 0 && BacteriaManagerInstance.Production > 0)
+        {
+            Pause = true;
+            DefaiteDial.SetActive(true);
         }
         
-
     }
 
     private void EnableTop(bool enable)
@@ -185,5 +184,24 @@ public class MainManager : MonoBehaviour
     {
         Tuto = tuto;
         Pause = false;
+        ManagePhase();
     }
+
+    public void Return()
+    {
+        Pause = false;
+    }
+
+    public void RecolteGly()
+    {
+        Pause = true;
+        VictoryDial.SetActive(true);
+    }
+
+    public void ReturnMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    
 }

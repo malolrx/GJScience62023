@@ -114,7 +114,7 @@ public class Bacteria : MonoBehaviour
 
             if (life <= -100) 
             {
-                
+
                 Manager.Kill(this.ID);
             }
         }
@@ -309,7 +309,6 @@ public class Bacteria : MonoBehaviour
 
     private void DuplicateBacteria()
     {
-        Debug.Log("duplication : " + Life + " " + Mutation);
         // Duplication = 0;
         if (Mutation < Manager.MutationThreshold)
             Mutation *= 0.8f;

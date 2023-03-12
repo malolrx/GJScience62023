@@ -70,10 +70,10 @@ public class ExposureLight : MonoBehaviour
         switch (Type)
         {
             case ExposureLightType.RED:
-                GetComponent<SpriteRenderer>().color = Color.red;
+                GetComponent<SpriteRenderer>().color = Color.magenta;
                 break;
             case ExposureLightType.GREEN:
-                GetComponent<SpriteRenderer>().color = Color.green;
+                GetComponent<SpriteRenderer>().color = Color.yellow;
                 break;
         }
     }
