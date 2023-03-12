@@ -171,7 +171,7 @@ public class BacteriaManager : MonoBehaviour
     public ExposureLight LightLeft;
     public TextMeshProUGUI text;
 
-    private Dictionary<int, Bacteria> bacterias;
+    public Dictionary<int, Bacteria> bacterias;
     int cmpt;
     public double Production;
 
@@ -224,6 +224,7 @@ public class BacteriaManager : MonoBehaviour
 
     private void Update()
     {
+        if(!MainManager.Pause)
         text.text = Production.ToString();
     }
 

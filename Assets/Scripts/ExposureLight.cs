@@ -12,6 +12,8 @@ public class ExposureLight : MonoBehaviour
         NO
     }
 
+    public ExposureLightType BaseExposureLightType;
+
     private ExposureLightType type;
     public ExposureLightType Type
     {
@@ -37,7 +39,8 @@ public class ExposureLight : MonoBehaviour
 
         set
         {
-            if (value)
+            on = value;
+            if (!value)
             {
                 GetComponent<SpriteRenderer>().color = Color.gray;
             }
@@ -45,34 +48,16 @@ public class ExposureLight : MonoBehaviour
             {
                 ChangeColor();
             }
+            
         }
     }
 
-    public GameObject Controllers;
-    private Button Redbut;
-    private Button Nobut;
-    private Button Greenbut;
-    private ExposureLightType beforeNo;
 
     // Start is called before the first frame update
     void Start()
     {
-        beforeNo = ExposureLightType.GREEN;
+        Type = BaseExposureLightType;
         ChangeColor();
-        Debug.Log(Controllers.GetComponentsInChildren<Button>().Length);
-        Nobut = Controllers.GetComponentsInChildren<Button>()[0];
-        Greenbut = Controllers.GetComponentsInChildren<Button>()[1];
-        Redbut = Controllers.GetComponentsInChildren<Button>()[2];
-
-        Nobut.onClick.AddListener(SwitchOn);
-        Greenbut.onClick.AddListener(Green);
-        Redbut.onClick.AddListener(Red);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public bool IsInLight(Vector3 position)
@@ -103,8 +88,5 @@ public class ExposureLight : MonoBehaviour
         Type = ExposureLightType.GREEN;
     }
 
-    public void SwitchOn()
-    {
-        ON = !ON;
-    }
+    
 }

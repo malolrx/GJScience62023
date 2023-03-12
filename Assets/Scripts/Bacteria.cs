@@ -265,36 +265,39 @@ public class Bacteria : MonoBehaviour
 
     private void Update()
     {
-
-        Debug.Log(ExposedLight);
-        if (Manager.LightTop.IsInLight(transform.position))
+        if (!MainManager.Pause)
         {
-            ExposedLight = Manager.LightTop.Type;
+            Debug.Log(ExposedLight);
+            if (Manager.LightTop.IsInLight(transform.position))
+            {
+                ExposedLight = Manager.LightTop.Type;
+            }
+            else if (Manager.LightBot.IsInLight(transform.position))
+            {
+                ExposedLight = Manager.LightBot.Type;
+            }
+            else if (Manager.LightLeft.IsInLight(transform.position))
+            {
+                ExposedLight = Manager.LightLeft.Type;
+            }
+            else if (Manager.LightRight.IsInLight(transform.position))
+            {
+                ExposedLight = Manager.LightRight.Type;
+            }
+            else
+            {
+                ExposedLight = ExposureLightType.NO;
+            }
+            if (Life < 0)
+                Life -= LifeRate;
         }
-        else if (Manager.LightBot.IsInLight(transform.position))
-        {
-            ExposedLight = Manager.LightBot.Type;
-        }
-        else if (Manager.LightLeft.IsInLight(transform.position))
-        {
-            ExposedLight = Manager.LightLeft.Type;
-        }
-        else if (Manager.LightRight.IsInLight(transform.position))
-        {
-            ExposedLight = Manager.LightRight.Type;
-        }
-        else
-        {
-            ExposedLight = ExposureLightType.NO;
-        }
-        if (Life < 0)
-            Life -= LifeRate;
+        
     }
 
     // Update is called once per frame
     void UpdateSecond()
     {
-        if (ready)
+        if (ready && !MainManager.Pause)
         {
             Duplication += DuplicationRate + duplicationRateOffset;
             Life -= LifeRate;

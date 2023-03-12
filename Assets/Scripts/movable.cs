@@ -39,31 +39,37 @@ public class movable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Input.GetMouseButton(0)) {
-            return;
+        if (!MainManager.Pause)
+        {
+            if (!Input.GetMouseButton(0))
+            {
+                return;
+            }
+
+            Vector3 actupos = mouse_obj.transform.position;
+            Vector3 lastpos = mouse_comp.LastPosition;
+            // if (transform.position)
+
+            // distance to mouse vector
+            float distance_line = Mathf.Abs((lastpos.x - actupos.x) * (actupos.y - transform.position.y)
+                            - (actupos.x - transform.position.x) * (lastpos.y - actupos.y));
+            float distance_last = Vector3.Distance(lastpos, transform.position);
+            float distance_actu = Vector3.Distance(actupos, transform.position);
+            // float distance_midd = Vector3.Distance(mouse_comp.MiddleMovement, transform.position);
+            float distance_midd = (distance_last + distance_actu) / 2;
+            float impulse_force = mouse_comp.DistanceLastPosition * force_push;
+
+            if (distance_line < impulse_force / 3)
+            {
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                rb.AddForce((actupos - lastpos) / (distance_midd) * (impulse_force));
+                if (distance_actu > distance_last && distance_actu * distance_last < 2)
+                    rb.AddForce((mouse_comp.MiddleMovement - transform.position) * (impulse_force));
+                if (distance_actu < distance_last && distance_actu * distance_last < 2)
+                    rb.AddForce((transform.position - mouse_comp.MiddleMovement) * (impulse_force));
+            }
         }
         
-        Vector3 actupos = mouse_obj.transform.position;
-        Vector3 lastpos = mouse_comp.LastPosition;
-        // if (transform.position)
-
-        // distance to mouse vector
-        float distance_line = Mathf.Abs((lastpos.x - actupos.x)*(actupos.y - transform.position.y)
-                        - (actupos.x - transform.position.x)*(lastpos.y - actupos.y));
-        float distance_last = Vector3.Distance(lastpos, transform.position);
-        float distance_actu = Vector3.Distance(actupos, transform.position);
-        // float distance_midd = Vector3.Distance(mouse_comp.MiddleMovement, transform.position);
-        float distance_midd = (distance_last+distance_actu)/2;
-        float impulse_force = mouse_comp.DistanceLastPosition*force_push;
-
-        if (distance_line < impulse_force/3) {
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.AddForce((actupos-lastpos)/(distance_midd)*(impulse_force));
-            if (distance_actu > distance_last && distance_actu*distance_last < 2) 
-                rb.AddForce((mouse_comp.MiddleMovement - transform.position)*(impulse_force));
-            if (distance_actu < distance_last && distance_actu*distance_last < 2) 
-                rb.AddForce((transform.position - mouse_comp.MiddleMovement)*(impulse_force));
-        }
 
         // rb.AddForce((transform.position -  middle) * distrel / (dist));
         

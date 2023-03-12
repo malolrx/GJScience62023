@@ -14,14 +14,21 @@ public class random_mov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (Random.Range(0,10) >= force) {
-            int x = Random.Range(-2,3);
-            int y = Random.Range(-2,3);
-            rb.AddForce(new Vector3(x,y,0));
-            force +=2*( x*x + y*y);
-        } else {
-            force --;
+        if (!MainManager.Pause)
+        {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            if (Random.Range(0, 10) >= force)
+            {
+                int x = Random.Range(-2, 3);
+                int y = Random.Range(-2, 3);
+                rb.AddForce(new Vector3(x, y, 0));
+                force += 2 * (x * x + y * y);
+            }
+            else
+            {
+                force--;
+            }
         }
+        
     }
 }

@@ -44,15 +44,17 @@ public class mouse : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        lastPos = transform.position;
-        transform.position = MousePositionInScreen();
-        distanceLastPos = Vector3.Distance(lastPos, transform.position);
-        middleMov = (lastPos + transform.position)/2;
+        if (!MainManager.Pause)
+        {
+            lastPos = transform.position;
+            transform.position = MousePositionInScreen();
+            distanceLastPos = Vector3.Distance(lastPos, transform.position);
+            middleMov = (lastPos + transform.position) / 2;
 
-        // Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        // GameObject trace = new GameObject();
-        // trace.AddComponent<SpriteRenderer>();
-
+            // Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            // GameObject trace = new GameObject();
+            // trace.AddComponent<SpriteRenderer>();
+        }
 
     }
 }
