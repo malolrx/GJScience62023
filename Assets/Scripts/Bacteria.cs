@@ -160,7 +160,7 @@ public class Bacteria : MonoBehaviour
                 duplicationRateOffset+=1;
                 LifeRate = Manager.BaseLifeRate;
                 DuplicationRate = Manager.BaseDupliRate;
-
+                ProductionRate = 0;
                 // ?
                 // Mutation = 0;
 
