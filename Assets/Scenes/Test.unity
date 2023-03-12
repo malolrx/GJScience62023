@@ -844,14 +844,16 @@ MonoBehaviour:
   sprite_dead_3: {fileID: 21300000, guid: a850157c34e1a45deaec6035c33c0891, type: 3}
   BacteriaPrefab: {fileID: 7166304344520806314, guid: 7dfe04a8fd91c6345b269c5accbf81a7, type: 3}
   BacteriaMax: 250
-  BaseLife: 70
+  BaseLife: 30
   BaseLifeRate: 1
   BaseProdRate: 0
-  BaseDupliRate: 2
-  BaseDupliLim: 25
+  BaseDupliRate: 1
+  BaseDupliLim: 20
   BaseMutRate: 1
   DuplicationMultipliyer: 25
   ProductionMultipliyer: 10
+  LifeRateDivider: 2
+  MutationMultipliyer: 4
   MutationTriggering: 800
   MutationThreshold: 1000
   LightTop: {fileID: 1719746081}
@@ -1081,7 +1083,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e0c87d3683d834dbfaa929c6b8322c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 0
   Controllers: {fileID: 432829742}
 --- !u!212 &651014834
 SpriteRenderer:
@@ -1264,7 +1266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e0c87d3683d834dbfaa929c6b8322c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 1
   Controllers: {fileID: 362763348}
 --- !u!1 &887669544
 GameObject:

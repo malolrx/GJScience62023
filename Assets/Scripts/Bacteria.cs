@@ -94,12 +94,13 @@ public class Bacteria : MonoBehaviour
         {
             
             life = value;
-            if (life <= 0)
+            if (life < 0)
             {
                 // death animation
                 DuplicationRate = 0;
                 Duplication = 0;
                 ProductionRate = 0;
+                LifeRate = 1f/4f;
                 random_mov rm = GetComponent<random_mov>();
                 if (rm) Destroy(rm);
 
@@ -158,9 +159,11 @@ public class Bacteria : MonoBehaviour
                 // productionRateOffset-=1; ?
                 mutationRateOffset+=2;
                 duplicationRateOffset+=1;
+                LifeRate = Manager.BaseLifeRate;
+                DuplicationRate = Manager.BaseDupliRate;
 
                 // ?
-                Mutation = 0;
+                // Mutation = 0;
 
                 SpriteRenderer sr = GetComponent<SpriteRenderer>();
                 sr.sprite = Manager.sprite_mutated(ID%3);
@@ -189,7 +192,7 @@ public class Bacteria : MonoBehaviour
     UnityEvent LightChanged;
 
     bool isBurnedOut() {
-        return Life < DuplicationLimitation;
+        return Life < DuplicationLimitation-Duplication;
     }
 
     bool isMutated() {
@@ -285,7 +288,7 @@ public class Bacteria : MonoBehaviour
             ExposedLight = ExposureLightType.NO;
         }
         if (Life < 0)
-            Life -= LifeRate/2;
+            Life -= LifeRate;
     }
 
     // Update is called once per frame
@@ -303,12 +306,18 @@ public class Bacteria : MonoBehaviour
 
     private void DuplicateBacteria()
     {
-        Manager.CreateBacteria(transform.position, isMutated()?(int)Manager.MutationThreshold:(int)(Mutation*0.9));
+        Debug.Log("duplication : " + Life + " " + Mutation);
+        // Duplication = 0;
+        Mutation *= 0.92f;
+        if (Manager.CreateBacteria(transform.position, Mutation))
+            Life = Manager.BaseLife;
+
     }
 
     private void OnLightChanged()
     {
         if (isMutated()) return;
+        if (Life <= 0) return;
 
         Debug.Log("trigger");
         if(ExposedLight == ExposureLightType.RED)
@@ -324,7 +333,7 @@ public class Bacteria : MonoBehaviour
             } else {
                 ProductionRate = productionRateOffset;
             }
-            LifeRate+=1;
+            LifeRate = Manager.LifeRateDivider;
 
             SpriteRenderer sr = GetComponent<SpriteRenderer>();
             if (isBurnedOut()) {
@@ -339,8 +348,8 @@ public class Bacteria : MonoBehaviour
             //croissance ++, production 0, lifeRate-
             if (duplicationRateOffset == 0)
                 DuplicationRate = Manager.DuplicationMultipliyer;
-            LifeRate /= 3;
-            MutationRate += 2;
+            LifeRate /= Manager.LifeRateDivider;
+            MutationRate += Manager.MutationMultipliyer;
         }
         else
         {
