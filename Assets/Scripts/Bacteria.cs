@@ -99,14 +99,14 @@ public class Bacteria : MonoBehaviour
                 DuplicationRate = 0;
                 Duplication = 0;
                 ProductionRate = 0;
-                LifeRate = 1f/4f;
+                LifeRate = 1f/2f;
                 random_mov rm = GetComponent<random_mov>();
                 if (rm) Destroy(rm);
 
                 float rate = (100f+life)/100f;
                 SpriteRenderer sr = GetComponent<SpriteRenderer>();
                 sr.sprite = Manager.sprite_dead(ID%3);
-                sr.color *= rate;
+                sr.color = new Vector4(rate,rate,rate,rate);
                 
                 Rigidbody2D rb = GetComponent<Rigidbody2D>();
                 rb.mass = rate;
@@ -312,7 +312,8 @@ public class Bacteria : MonoBehaviour
         Debug.Log("duplication : " + Life + " " + Mutation);
         // Duplication = 0;
         if (Mutation < Manager.MutationThreshold)
-            Mutation *= 0.8f;
+            Mutation *= 0.9f;
+        
         if (Manager.CreateBacteria(transform.position, Mutation)) {
             Life = Manager.BaseLife;
             Duplication = 0;

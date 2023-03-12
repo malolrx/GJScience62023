@@ -12,10 +12,8 @@ GameObject:
   - component: {fileID: 7166304344520806315}
   - component: {fileID: 7166304344520806313}
   - component: {fileID: 6195879928821541701}
-  - component: {fileID: -1803826135131293898}
   - component: {fileID: -14815926810780169}
   - component: {fileID: -7427327898938197083}
-  - component: {fileID: 1869010251645370473}
   - component: {fileID: -2026844660166087907}
   m_Layer: 0
   m_Name: Bacteria
@@ -126,32 +124,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &-1803826135131293898
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166304344520806314}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.2562852, y: 0.017744064}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 14.184127, y: 21.630001}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 16.186005, y: 30.498158}
-  m_EdgeRadius: 0
 --- !u!114 &-14815926810780169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,28 +149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa6dfa382e2654ac9325923d968fbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!68 &1869010251645370473
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166304344520806314}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -7.0920634, y: 0}
-  - {x: 7.0920634, y: 0}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+  power: 100
+  BasePower: 2
+  ShakePower: 25
+  Shake: {fileID: 0}
 --- !u!70 &-2026844660166087907
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
