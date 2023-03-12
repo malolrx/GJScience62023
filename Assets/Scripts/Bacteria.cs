@@ -47,7 +47,7 @@ public class Bacteria : MonoBehaviour
         set
         {
             duplication = value;
-            if (duplication >= DuplicationLimitation)
+            if(duplication >= DuplicationLimitation)
             {
                 DuplicateBacteria();
                 return;
@@ -155,7 +155,7 @@ public class Bacteria : MonoBehaviour
             if (isMutated()) {
                 // gets a mutation and a new sprite
 
-                productionRateOffset-=1;
+                productionRateOffset-=1; 
                 mutationRateOffset+=2;
                 duplicationRateOffset+=1;
                 LifeRate = Manager.BaseLifeRate;
@@ -257,6 +257,7 @@ public class Bacteria : MonoBehaviour
         this.ProductionRate = ProdRate;
         this.MutationRate = MutRate;
         this.Mutation = Mutation;
+        Duplication = 0;
         ready = true;
         LightChanged = new UnityEvent();
         LightChanged.AddListener(OnLightChanged);
@@ -311,7 +312,7 @@ public class Bacteria : MonoBehaviour
         Debug.Log("duplication : " + Life + " " + Mutation);
         // Duplication = 0;
         if (Mutation < Manager.MutationThreshold)
-            Mutation *= 0.92f;
+            Mutation *= 0.8f;
         if (Manager.CreateBacteria(transform.position, Mutation)) {
             Life = Manager.BaseLife;
             Duplication = 0;
@@ -325,19 +326,15 @@ public class Bacteria : MonoBehaviour
         if (Life <= 0) return;
 
         Debug.Log("trigger");
+
         if(ExposedLight == ExposureLightType.RED)
         {
             resetRates();
             //croissance 0, production ++
-            if (duplicationRateOffset != 0) {
-                DuplicationRate = 0;
-            }
-            if (productionRateOffset == 0)
-            {
-                ProductionRate = Manager.ProductionMultipliyer;
-            } else {
-                ProductionRate = productionRateOffset;
-            }
+            DuplicationRate = 0;
+            ProductionRate = Manager.ProductionMultipliyer;
+            
+            
             LifeRate = Manager.LifeRateDivider;
 
             SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -351,8 +348,8 @@ public class Bacteria : MonoBehaviour
         {
             resetRates();
             //croissance ++, production 0, lifeRate-
-            if (duplicationRateOffset == 0)
-                DuplicationRate = Manager.DuplicationMultipliyer;
+        
+            DuplicationRate = Manager.DuplicationMultipliyer;
             LifeRate /= Manager.LifeRateDivider;
             MutationRate += Manager.MutationMultipliyer;
         }
