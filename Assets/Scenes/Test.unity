@@ -2351,7 +2351,7 @@ MonoBehaviour:
   DuplicationMultipliyer: 4
   ProductionMultipliyer: 10
   LifeRateDivider: 2
-  MutationMultipliyer: 4
+  MutationMultipliyer: 7
   MutationTriggering: 400
   MutationThreshold: 500
   LightTop: {fileID: 1719746081}
@@ -2406,7 +2406,10 @@ MonoBehaviour:
   ScoreToJauge: 5000
   LightManagerInstance: {fileID: 503687241}
   BacteriaManagerInstance: {fileID: 503687240}
-  FinTuto: {fileID: 522447370}
+  Dialogue: {fileID: 0}
+  Recolte: {fileID: 0}
+  VictoryDial: {fileID: 0}
+  DefaiteDial: {fileID: 0}
   JaugeLabel: {fileID: 1248500626}
   Tuto: 0
 --- !u!114 &503687243
