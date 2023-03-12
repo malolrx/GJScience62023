@@ -9,6 +9,7 @@ public class Dialbox : MonoBehaviour
 
     public string stepOneFirst;
     public string stepOneSecond;
+    public string stepOneSecondBis;
     public string stepOneThird;
 
     public string stepTwoFirst;
@@ -50,26 +51,29 @@ public class Dialbox : MonoBehaviour
                 text.text = stepOneSecond;
                 break;
             case 2:
-                text.text = stepOneThird;
+                text.text = stepOneSecondBis;
                 break;
             case 3:
-                MainManager.Pause = false;
-                gameObject.SetActive(false);
+                text.text = stepOneThird;
                 break;
             case 4:
-                text.text = stepTwoFirst;
-                break;
-            case 5:
-                text.text = stepTwoSecond;
-                break;
-            case 6:
                 MainManager.Pause = false;
                 gameObject.SetActive(false);
                 break;
+            case 5:
+                text.text = stepTwoFirst;
+                break;
+            case 6:
+                text.text = stepTwoSecond;
+                break;
             case 7:
-                text.text = stepThreeFirst;
+                MainManager.Pause = false;
+                gameObject.SetActive(false);
                 break;
             case 8:
+                text.text = stepThreeFirst;
+                break;
+            case 9:
                 MainManager.Pause = false;
                 gameObject.SetActive(false);
                 break;

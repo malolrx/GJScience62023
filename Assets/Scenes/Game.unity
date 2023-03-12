@@ -3859,8 +3859,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6.8359, y: 119.22986}
-  m_SizeDelta: {x: 1026.9523, y: 827.1635}
+  m_AnchoredPosition: {x: 13.608498, y: 128.71155}
+  m_SizeDelta: {x: 1240.9681, y: 808.2001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &683673041
 MonoBehaviour:
@@ -5602,8 +5602,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
-  m_SizeDelta: {x: 1000, y: 500}
+  m_AnchoredPosition: {x: 17.6089, y: 200}
+  m_SizeDelta: {x: 1186.925, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1084645923
 MonoBehaviour:
@@ -6537,9 +6537,10 @@ MonoBehaviour:
     de se reproduire. Ca les stresse et si on abuse, elles nous font des burnouts.
     Or une bact\xE9rie en burnout ne sert VRAIMENT VRAIMENT \xE0 rien. Mais pas de
     panique, un petit passage sous la lumi\xE8re JAUNE leur fera le plus grand bien
-    !Tu allumes et \xE9teint le spot avec son LEVIER Pour changer la couleur d'un
-    spot, tu le s\xE9lectionnes avec sa DIODE puis tu tournes le BOUTON DE COULEUR
-    JAUNE OU VIOLETTE"
+    !"
+  stepOneSecondBis: "Tu allumes et \xE9teint le spot avec son LEVIER Pour changer
+    la couleur d'un spot, tu le s\xE9lectionnes avec sa DIODE puis tu tournes le
+    BOUTON DE COULEUR JAUNE OU VIOLETTE"
   stepOneThird: "Mais fais quand m\xEAme attention \xE0 une chose : j'ai g\xE9n\xE9tiquement
     modifi\xE9 mes bact\xE9ries et c'est g\xE9nial ! Malheureusement, plus elles
     se reproduisent vite et plus elles risquent de muter. Et les bact\xE9ries mutantes
@@ -7867,7 +7868,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: -17.54}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -527, y: -203.75262}
+  m_AnchoredPosition: {x: -585, y: -212}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1647088626
