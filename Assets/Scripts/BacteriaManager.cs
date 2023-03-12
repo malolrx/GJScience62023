@@ -159,6 +159,8 @@ public class BacteriaManager : MonoBehaviour
     public float BaseMutRate;
     public int DuplicationMultipliyer;
     public int ProductionMultipliyer;
+    public float LifeRateDivider;
+    public float MutationMultipliyer;
 
     public int MutationTriggering;
     public int MutationThreshold;
@@ -186,7 +188,7 @@ public class BacteriaManager : MonoBehaviour
         CreateBacteria(transform.position);
     }
 
-    public void CreateBacteria(Vector3 position,int modifier = 0)
+    public bool CreateBacteria(Vector3 position, double mutation = 0, int modifier = 0)
     {
         if(bacterias.Count < BacteriaMax)
         {
@@ -196,6 +198,7 @@ public class BacteriaManager : MonoBehaviour
             var id = cmpt;
             cmpt++;
             
+
             bacterias.Add(id, bac);
             bac.Init(this,
                 id,
@@ -205,9 +208,11 @@ public class BacteriaManager : MonoBehaviour
                 BaseDupliRate,
                 BaseDupliLim,
                 BaseMutRate, 
-                modifier);
+                mutation);
+            return true;
         }
         Debug.Log(bacterias.Count);
+        return false;
     }
 
     public void Kill(int ID)
