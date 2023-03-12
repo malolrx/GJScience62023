@@ -99,11 +99,11 @@ public class MainManager : MonoBehaviour
             case GamePhase.THREE:
                 EnableRight(true);
                 EnableLeft(true);
+                Recolte.SetActive(true);
                 if (Tuto && step3 == false)
                 {
                     Pause = true;
                     Dialogue.SetActive(true);
-                    Recolte.SetActive(true);
                     step3 = true;
                 }
                 break;

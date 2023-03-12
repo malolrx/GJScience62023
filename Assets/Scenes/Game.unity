@@ -1557,9 +1557,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Dialbox, Assembly-CSharp
-        m_MethodName: ShowNextText
+      - m_Target: {fileID: 503687242}
+        m_TargetAssemblyTypeName: MainManager, Assembly-CSharp
+        m_MethodName: Return
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1929,9 +1929,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Dialbox, Assembly-CSharp
-        m_MethodName: ShowNextText
+      - m_Target: {fileID: 503687242}
+        m_TargetAssemblyTypeName: MainManager, Assembly-CSharp
+        m_MethodName: Return
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3061,11 +3061,11 @@ MonoBehaviour:
   sprite_dead_3: {fileID: 21300000, guid: a850157c34e1a45deaec6035c33c0891, type: 3}
   BacteriaPrefab: {fileID: 7166304344520806314, guid: 7dfe04a8fd91c6345b269c5accbf81a7, type: 3}
   BacteriaMax: 250
-  BaseLife: 30
+  BaseLife: 40
   BaseLifeRate: 1
   BaseProdRate: 0
   BaseDupliRate: 1
-  BaseDupliLim: 20
+  BaseDupliLim: 25
   BaseMutRate: 3
   DuplicationMultipliyer: 7
   ProductionMultipliyer: 10
@@ -3355,7 +3355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 801, y: 454}
+  m_AnchoredPosition: {x: 694, y: 450}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &533560720
@@ -3378,7 +3378,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5337,11 +5337,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2781566383837941555, guid: f003831dfdd8bbbf1aa37674ecdd410b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 433.1012
+      value: 771.66
       objectReference: {fileID: 0}
     - target: {fileID: 2781566383837941555, guid: f003831dfdd8bbbf1aa37674ecdd410b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 56.205395
+      value: 73.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781566385189370252, guid: f003831dfdd8bbbf1aa37674ecdd410b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 771.6564
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781566385189370252, guid: f003831dfdd8bbbf1aa37674ecdd410b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 73.46863
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781566385250771246, guid: f003831dfdd8bbbf1aa37674ecdd410b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 771.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781566385250771246, guid: f003831dfdd8bbbf1aa37674ecdd410b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -312.36
       objectReference: {fileID: 0}
     - target: {fileID: 4813486596211137230, guid: f003831dfdd8bbbf1aa37674ecdd410b, type: 3}
       propertyPath: m_Pivot.x
@@ -5409,11 +5425,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4813486596211137230, guid: f003831dfdd8bbbf1aa37674ecdd410b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 338.29
       objectReference: {fileID: 0}
     - target: {fileID: 4813486596211137230, guid: f003831dfdd8bbbf1aa37674ecdd410b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 4813486596211137230, guid: f003831dfdd8bbbf1aa37674ecdd410b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6615,7 +6631,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 801, y: 390.5}
+  m_AnchoredPosition: {x: 694, y: 383}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1248500626
@@ -6638,7 +6654,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
