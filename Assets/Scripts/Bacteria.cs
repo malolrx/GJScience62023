@@ -46,12 +46,12 @@ public class Bacteria : MonoBehaviour
         }
         set
         {
-            if(duplication >= DuplicationLimitation)
+            duplication = value;
+            if (duplication >= DuplicationLimitation)
             {
                 DuplicateBacteria();
                 return;
             }
-            duplication = value;
         }
     }
 
@@ -155,7 +155,7 @@ public class Bacteria : MonoBehaviour
             if (isMutated()) {
                 // gets a mutation and a new sprite
 
-                productionRateOffset-=1; ?
+                productionRateOffset-=1;
                 mutationRateOffset+=2;
                 duplicationRateOffset+=1;
                 LifeRate = Manager.BaseLifeRate;
