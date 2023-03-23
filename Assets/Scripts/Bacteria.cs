@@ -70,7 +70,7 @@ public class Bacteria : MonoBehaviour
     }
 
 
-    private double productionRateOffset;
+    // private double productionRateOffset;
     private double productionRate;
     public double ProductionRate
     {
@@ -135,7 +135,7 @@ public class Bacteria : MonoBehaviour
         }
     }
 
-    private double mutationRateOffset;
+    // private double mutationRateOffset;
     private double mutation;
     public double Mutation
     {
@@ -155,12 +155,12 @@ public class Bacteria : MonoBehaviour
             if (isMutated()) {
                 // gets a mutation and a new sprite
 
-                productionRateOffset-=1; 
-                mutationRateOffset+=2;
+                // productionRateOffset-=1; 
+                // mutationRateOffset+=2;
                 duplicationRateOffset+=1;
                 LifeRate = Manager.BaseLifeRate;
                 DuplicationRate = Manager.BaseDupliRate;
-                ProductionRate = 0;
+                ProductionRate = -1;
                 // ?
                 // Mutation = 0;
 
@@ -229,9 +229,9 @@ public class Bacteria : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mutationRateOffset=0;
+        // mutationRateOffset=0;
         duplicationRateOffset=0;
-        productionRateOffset=0;
+        // productionRateOffset=0;
         Duplication = 0;
         InvokeRepeating("UpdateSecond", 0, 1.0f);
         GetComponent<SpriteRenderer>().sprite = Manager.sprite_norm_stat(ID%3);
@@ -301,7 +301,7 @@ public class Bacteria : MonoBehaviour
         {
             Duplication += DuplicationRate + duplicationRateOffset;
             Life -= LifeRate;
-            Mutation += MutationRate + mutationRateOffset;
+            Mutation += MutationRate;
             Manager.Production += ProductionRate;
         }
         

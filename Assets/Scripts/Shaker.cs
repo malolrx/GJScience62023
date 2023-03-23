@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class Shaker : MonoBehaviour
 {
+
+    public Sprite PressedButton;
+    public Sprite NotPressedButton;
+    
     public bool ispressed;
     public bool isPressed {
         get {return ispressed;}
@@ -19,6 +23,10 @@ public class Shaker : MonoBehaviour
     public void OnPointerDown(){
         Debug.Log("bouton pressé");
         ispressed = !ispressed;
+        if  (ispressed) 
+            GetComponent<Image>().sprite = PressedButton;
+        else 
+            GetComponent<Image>().sprite = NotPressedButton;
     }
     
     public void OnPointerUp(){

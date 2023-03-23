@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class mouse : MonoBehaviour
 {
+
+    public Sprite notclicking;
+    public Sprite clicking;
+
+
     private Vector3 lastPos;
     public Vector3 LastPosition {
         get {
@@ -28,7 +33,7 @@ public class mouse : MonoBehaviour
 
     Vector3 MousePositionInScreen() {
         Vector3 mousepos = Input.mousePosition;
-        mousepos.z = 10;
+        mousepos.z = +100;
         return Camera.main.ScreenToWorldPoint(mousepos);
     }
 
@@ -39,6 +44,8 @@ public class mouse : MonoBehaviour
         lastPos = MousePositionInScreen();
         distanceLastPos = 0;
     }
+
+
 
 
     // Update is called once per frame
