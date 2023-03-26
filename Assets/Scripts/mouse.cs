@@ -33,7 +33,7 @@ public class mouse : MonoBehaviour
 
     Vector3 MousePositionInScreen() {
         Vector3 mousepos = Input.mousePosition;
-        mousepos.z = +100;
+        mousepos.z = 10;
         return Camera.main.ScreenToWorldPoint(mousepos);
     }
 
